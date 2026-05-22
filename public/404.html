@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="0" />
+    <title>Redirecting...</title>
+    <script>
+      (function() {
+        const fullPath = window.location.pathname + window.location.search + window.location.hash;
+        const segments = window.location.pathname.split('/').filter(Boolean);
+        const repoBase = segments.length > 1 ? '/' + segments[0] : '';
+        const appPath = repoBase && fullPath.startsWith(repoBase)
+          ? fullPath.slice(repoBase.length)
+          : fullPath;
+        const redirectUrl = repoBase + '/#' + encodeURIComponent(appPath || '/');
+        window.location.replace(redirectUrl);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to the app...</p>
+  </body>
+</html>

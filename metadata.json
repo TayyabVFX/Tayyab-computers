@@ -1,0 +1,6 @@
+{
+  "name": "Tayyab Computers Hub",
+  "description": "An upgraded premium storefront and admin control dashboard for managing computer components, track cost/sale metrics, and process customer orders.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "TC-1001",
+    "createdAt": "2026-05-22T18:27:58.874Z",
+    "customerName": "dg",
+    "customerPhone": "dsgsdg",
+    "customerAddress": "sdgfsd",
+    "productId": "prod-1779474466441",
+    "productName": "tryuhtryu",
+    "variantLabel": "Standard",
+    "quantity": 1,
+    "salePrice": 0,
+    "costPrice": 0,
+    "otherExpenses": 500,
+    "totalPrice": 0,
+    "profit": -500,
+    "status": "New",
+    "notes": "Order placed online via storefront check-out."
+  },
+  {
+    "id": "TC-1002",
+    "createdAt": "2026-05-22T18:28:05.761Z",
+    "customerName": "sdgfsg",
+    "customerPhone": "ds",
+    "customerAddress": "gsd",
+    "productId": "prod-1779474117689",
+    "productName": "dsggh",
+    "variantLabel": "Standard",
+    "quantity": 1,
+    "salePrice": 0,
+    "costPrice": 0,
+    "otherExpenses": 500,
+    "totalPrice": 0,
+    "profit": -500,
+    "status": "New",
+    "notes": "Order placed online via storefront check-out."
+  }
+]
