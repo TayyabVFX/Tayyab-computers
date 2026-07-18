@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        // Immediately redirect broken links back to the home page
+        window.location.replace("/");
+    </script>
+</head>
+<body>
+    <div style="font-family: system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; color: #475569; background: #f8fafc; text-align: center; padding: 20px;">
+        <h2 style="margin-bottom: 8px; color: #1e293b;">Page Not Found</h2>
+        <p style="margin-top: 0; margin-bottom: 20px;">Redirecting you to the home page...</p>
+        <div style="width: 24px; height: 24px; border: 3px solid #cbd5e1; border-top-color: #3b82f6; border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
+    </div>
+    <style>
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</body>
+</html>

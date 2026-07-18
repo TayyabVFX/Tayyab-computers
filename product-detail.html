@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Detail — Store by Tayyab</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --accent: #f97316;
+            --accent-hover: #ea580c;
+            --whatsapp: #25d366;
+            --bg: #f5f5f5;
+            --card-bg: #ffffff;
+            --text: #1a1a1a;
+            --text-light: #666;
+            --border: #e5e5e5;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --radius: 14px;
+            --header-height: 60px;
+        }
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding-top: var(--header-height);
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        }
+        .logo {
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.5px;
+            color: #1a1a1a;
+            flex: 1;
+            text-align: center;
+        }
+        .back-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text);
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 16px 40px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        @media (min-width: 768px) {
+            .product-container {
+                grid-template-columns: 1fr 1fr;
+                padding: 40px 24px;
+            }
+        }
+
+        .gallery-col {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .main-image {
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: #eaeaea;
+            aspect-ratio: 1;
+        }
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .thumb-row {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+        }
+        .thumb-row img {
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            background: #eaeaea;
+            flex-shrink: 0;
+            transition: border-color 0.15s;
+        }
+        .thumb-row img:hover,
+        .thumb-row img.active-thumb {
+            border-color: var(--accent);
+        }
+
+        .info-col {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .product-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            line-height: 1.3;
+        }
+        .product-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .product-price strong {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .product-price .original-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 1.1rem;
+        }
+        .product-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .order-form {
+            background: #f9fafb;
+            border-radius: var(--radius);
+            padding: 18px;
+            border: 1px solid var(--border);
+            margin-top: 12px;
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #444;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background: #fff;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.08);
+        }
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .quantity-control button {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--border);
+            background: #fff;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            min-height: 44px;
+            min-width: 44px;
+        }
+        .quantity-control input {
+            width: 60px;
+            text-align: center;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px;
+            font-size: 0.9rem;
+            min-height: 44px;
+        }
+        .btn-order {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: var(--whatsapp);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            min-height: 48px;
+            margin-top: 16px;
+            text-align: center;
+            transition: background 0.15s;
+        }
+        .btn-order:hover {
+            background: #1ebe57;
+        }
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #f3f4f6;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: all 0.15s;
+        }
+        .btn-back:hover {
+            background: #e5e7eb;
+        }
+
+        .video-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+        .video-section h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .video-embed {
+            border-radius: var(--radius);
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            background: #000;
+        }
+        .video-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .error-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+        }
+        .error-state h2 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="back-btn" id="backBtn" title="Go back">←</button>
+        <span class="logo">Store by Tayyab</span>
+        <div style="width: 44px;"></div>
+    </header>
+
+    <div class="product-container" id="productContainer" style="display: none;">
+        <!-- Gallery Column -->
+        <div class="gallery-col">
+            <div class="main-image">
+                <img id="mainImage" src="" alt="Product" />
+            </div>
+            <div class="thumb-row" id="thumbRow"></div>
+        </div>
+
+        <!-- Info Column -->
+        <div class="info-col">
+            <h1 class="product-title" id="productTitle"></h1>
+            <div class="product-meta">
+                <span id="productSKU"></span>
+                <span id="productCategory"></span>
+            </div>
+            <div class="product-price">
+                <strong id="productPrice"></strong>
+            </div>
+            <p class="product-description" id="productDescription"></p>
+
+            <div class="order-form">
+                <form id="orderForm" onsubmit="submitOrder(event)">
+                    <div class="form-group">
+                        <label>Your Name *</label>
+                        <input type="text" id="customerName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>WhatsApp Number *</label>
+                        <input type="tel" id="whatsappNumber" placeholder="+923001234567" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Delivery Address *</label>
+                        <textarea id="address" rows="2" placeholder="Enter your full address" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <div class="quantity-control">
+                            <button type="button" onclick="decreaseQty()">−</button>
+                            <input type="number" id="quantity" value="1" min="1" readonly>
+                            <button type="button" onclick="increaseQty()">+</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-order">📲 Send Order on WhatsApp</button>
+                </form>
+            </div>
+
+            <div class="video-section" id="videoSection" style="display: none;">
+                <h3>📺 Product Video</h3>
+                <div class="video-embed" id="videoEmbed"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="error-state" id="errorState" style="display: none;">
+        <h2>Product Not Found</h2>
+        <p>Sorry, we couldn't find this product. It may have been removed.</p>
+        <a href="index.html" class="btn-back">← Back to Products</a>
+    </div>
+
+    <script src="supabase.js"></script>
+    <script src="data-manager.js"></script>
+    <script>
+        let currentProduct = null;
+        let currentQty = 1;
+
+        function getProductIdFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
+
+        async function loadProduct() {
+            const productId = getProductIdFromURL();
+            if (!productId) {
+                showError();
+                return;
+            }
+
+            const products = await dataManager.getProducts();
+            currentProduct = products.find(p => p.id.toString() === productId.toString());
+
+            if (!currentProduct) {
+                showError();
+                return;
+            }
+
+            displayProduct();
+        }
+
+        function displayProduct() {
+            const photos = currentProduct.photos || [];
+            if (photos.length === 0) {
+                photos.push('https://via.placeholder.com/400x400?text=' + encodeURIComponent(currentProduct.name.substring(0, 10)));
+            }
+
+            // Set page title
+            document.title = currentProduct.name + ' — Store by Tayyab';
+
+            // Display main image
+            const mainImage = document.getElementById('mainImage');
+            mainImage.src = photos[0];
+
+            // Display thumbnails
+            const thumbRow = document.getElementById('thumbRow');
+            thumbRow.innerHTML = photos.map((photo, idx) => `
+                <img src="${photo}" alt="Photo ${idx + 1}" 
+                     class="${idx === 0 ? 'active-thumb' : ''}"
+                     data-index="${idx}">
+            `).join('');
+
+            // Bind click handlers dynamically to avoid breaking on large base64 strings
+            const thumbImgs = thumbRow.querySelectorAll('img');
+            thumbImgs.forEach(img => {
+                img.addEventListener('click', function() {
+                    const idx = parseInt(this.getAttribute('data-index'));
+                    changeMainImage(photos[idx], this);
+                });
+            });
+
+            // Display info
+            document.getElementById('productTitle').textContent = currentProduct.name;
+            document.getElementById('productSKU').textContent = 'SKU: ' + currentProduct.sku;
+            document.getElementById('productCategory').textContent = 'Category: ' + (currentProduct.category || 'Other');
+            document.getElementById('productPrice').textContent = 'Rs. ' + currentProduct.price.toLocaleString();
+            document.getElementById('productDescription').textContent = currentProduct.description || 'High-quality product from Store by Tayyab';
+
+            // Display video if exists
+            if (currentProduct.videoUrl) {
+                const videoSection = document.getElementById('videoSection');
+                videoSection.style.display = 'block';
+                const videoEmbed = document.getElementById('videoEmbed');
+                
+                // Extract YouTube video ID
+                let videoId = '';
+                if (currentProduct.videoUrl.includes('youtube.com')) {
+                    videoId = new URL(currentProduct.videoUrl).searchParams.get('v');
+                } else if (currentProduct.videoUrl.includes('youtu.be')) {
+                    videoId = currentProduct.videoUrl.split('youtu.be/')[1].split('?')[0];
+                }
+                
+                if (videoId) {
+                    videoEmbed.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>`;
+                }
+            }
+
+            document.getElementById('productContainer').style.display = 'grid';
+        }
+
+        function changeMainImage(src, element) {
+            document.getElementById('mainImage').src = src;
+            document.querySelectorAll('.thumb-row img').forEach(img => img.classList.remove('active-thumb'));
+            element.classList.add('active-thumb');
+        }
+
+        function increaseQty() {
+            currentQty++;
+            document.getElementById('quantity').value = currentQty;
+        }
+
+        function decreaseQty() {
+            if (currentQty > 1) {
+                currentQty--;
+                document.getElementById('quantity').value = currentQty;
+            }
+        }
+
+        async function submitOrder(e) {
+            e.preventDefault();
+
+            const customerName = document.getElementById('customerName').value.trim();
+            const whatsapp = document.getElementById('whatsappNumber').value.trim();
+            const address = document.getElementById('address').value.trim();
+
+            if (!customerName || !whatsapp || !address) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            const order = {
+                customerName,
+                whatsapp,
+                address,
+                productId: currentProduct.id,
+                productName: currentProduct.name,
+                qty: currentQty,
+                total: currentProduct.price * currentQty,
+                createdAt: new Date().toISOString()
+            };
+
+            const savedOrder = await dataManager.addOrder(order);
+
+            // Generate WhatsApp message
+            const message = `Hello, I want to order:
+📦 ${currentProduct.name}
+Quantity: ${currentQty}
+Total: Rs. ${(currentProduct.price * currentQty).toLocaleString()}
+
+Customer Details:
+Name: ${customerName}
+Address: ${address}
+
+Order ID: #${savedOrder.id}`;
+
+            const whatsappURL = 'https://wa.me/' + whatsapp.replace(/\D/g, '') + '?text=' + encodeURIComponent(message);
+            window.open(whatsappURL, '_blank');
+
+            // Reset form
+            document.getElementById('orderForm').reset();
+            currentQty = 1;
+            document.getElementById('quantity').value = 1;
+
+            alert('✅ Order saved! WhatsApp window opening...');
+        }
+
+        function showError() {
+            document.getElementById('errorState').style.display = 'block';
+        }
+
+        document.getElementById('backBtn').addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+
+        // Load product on page load
+        loadProduct();
+    </script>
+</body>
+</html>
+
+
